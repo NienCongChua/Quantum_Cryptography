@@ -47,30 +47,37 @@ print('\n','Keys are the Same?:',compare_keys(key_theory[0],key_exp[0]),'\n')
 
 
 # Send an encrypted message with key from experiment
-# Our message for this example is EM
 
 _message = input("Enter the message: ")
-string_to_binary(_message)
+
+# Convert the string message to binary
+binary_message = string_to_binary(_message)
+print('Binary message:', binary_message)
+
+# Ensure the key length matches the length of the binary message
+key_exp_for_message = key_exp[0][:len(binary_message)]  # Adjust the key length to match the message length
+print('Adjusted key for message length:', key_exp_for_message)
 
 # write message given the binary representation - without leading integers as explained above
-message = binary_converter(_message)
+message = binary_converter(binary_message)
 print('Alice message:',message)
 
 # Alice creates the encrypted message
-encrypted_message = encryption(message,key_exp[0])
+encrypted_message = encryption(message, key_exp_for_message)
 print('\n','Alice sends encrypted message:',encrypted_message)
 
 # Bob's received bits (should be the same as Alice's encrypted message with base +) - from the experiment
-bob_recieved = [0,1,0,0,1,1,1,1,0,0]
-print('\n','Bob received:',bob_recieved)
+# This is where Bob receives the encrypted message, so it should reflect the encrypted form, not the initial binary
+bob_received_bits = encrypted_message  # Bob gets the encrypted message directly from Alice
+print('\n','Bob received (encrypted message):', bob_received_bits)
 
-# Bob recreates the message
-decrypted_message = decryption(bob_recieved,key_exp[0])
-print('\n','Bob recreates the message:',decrypted_message)
+# Bob recreates the message from the received bits
+decrypted_message = decryption(bob_received_bits, key_exp_for_message)
+print('\n','Bob recreates the message:', decrypted_message)
 
-# after recreating the message
+# Convert the decrypted message back to a string
 message_bob = string_converter(decrypted_message)
-print('\n',"Bob's recreated string message:",message_bob)
+print('\n',"Bob's recreated string message:", message_bob)
 
 #########################################################################################################################
 # Eve 18 bit example
@@ -111,7 +118,7 @@ eve_base_tran_exp = eve_base_tran_theory
 # From experiment results
 bob_bit_exp = [1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,0,1,1]
 eve_bit_exp = [1,1,1,1,1,1,1,1,0,1,0,1,1,0,1,0,1,1]
-print('\n','Eve bit experiment:',eve_bit_exp) # Unnecassary for the experiment, only for explanatory reasons
+print('\n','Eve bit experiment:',eve_bit_exp) # Unnecessary for the experiment, only for explanatory reasons
 print('\n','Bob bit experiment:',bob_bit_exp)
 
 

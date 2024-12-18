@@ -122,13 +122,11 @@ def decryption(message, key):
     return decrypted_message
 
 
+def string_to_binary(message):
+    # Convert each character in the message to its binary equivalent
+    binary_message = ''.join(format(ord(char), '08b') for char in message)
+    return binary_message
 
-def string_to_binary(string):
-    # finds the binary value of the message
-    # Notice for this experiment purposes, the first two integers are discarded for the used message
-    # Should generally be 3, but missing the first zero in this case
-    # These first integers are used to differ from lower/upper case letters, which is not used in this experiment for the given key
-    return endecrypt.encode(string, 'binary')
     
 def binary_to_string(binary):
     # finds the string of the binary value
