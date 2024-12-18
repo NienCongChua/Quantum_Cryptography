@@ -52,6 +52,6 @@ We’re thrilled that you’re interested in contributing to our project! Here�
    - Open a pull request against the `main` branch of the original repository. Include a clear description of your changes and any relevant context.
 
 ## Author
-<a href="https://github.com/danny-avila/LibreChat/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=danny-avila/LibreChat" />
+<a href="https://github.com/NienCongChua/Quantum_Cryptography/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=NienCongChua/Quantum_Cryptography" />
 </a>
