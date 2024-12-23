@@ -98,8 +98,6 @@ def create_key(alice_base, alice_bits, bob_base, bob_bits):
     
     return [res_key, len(res_key), total_count, count_true, count_false, accuracy]
 
-
-
 def shorten_key(data, key):
     # Tự động lặp lại khóa để khớp với độ dài của dữ liệu
     if len(key) < len(data):
@@ -128,23 +126,46 @@ def string_to_binary(message):
     return binary_message
 
     
-def binary_to_string(binary):
-    # finds the string of the binary value
-    # input should be a single string of 1's and 0's accordingly with whitespace between each letter
-    # Should enter each letter with the first three integers: Lowercase - 011, Uppercase - 010
-    return endecrypt.decode(binary, 'binary')
+# def binary_to_string(binary):
+#     # finds the string of the binary value
+#     # input should be a single string of 1's and 0's accordingly with whitespace between each letter
+#     # Should enter each letter with the first three integers: Lowercase - 011, Uppercase - 010
+#     return endecrypt.decode(binary, 'binary')
+
+def binary_to_string(binary_list):
+    """
+    Chuyển danh sách nhị phân thành chuỗi ký tự.
+    :param binary_list: Danh sách các bit nhị phân (0 hoặc 1).
+    :return: Chuỗi ký tự đã được chuyển đổi.
+    """
+    # Chuyển danh sách nhị phân thành chuỗi nhị phân
+    binary_string = ''.join(map(str, binary_list))
+    
+    # Chia thành các nhóm 8 bit
+    byte_chunks = [binary_string[i:i + 8] for i in range(0, len(binary_string), 8)]
+    
+    # Chuyển đổi từng nhóm 8 bit thành ký tự
+    decoded_characters = [chr(int(byte, 2)) for byte in byte_chunks]
+    
+    # Ghép các ký tự thành chuỗi hoàn chỉnh
+    return ''.join(decoded_characters)
+
+
+# def binary_to_string(binary):
+#     binary_list = binary.split() 
+#     return ''.join(chr(int(b, 2)) for b in binary_list)
 
 def string_converter(binary_lst):
     # this function creates an alphabet message from a the binary code
-    word_length = 5 # as explained, every word is given as a 5 letter binary code for the message sent
+    word_length = 8 # as explained, every word is given as a 8 letter binary code for the message sent
     
     # split the list to different words
-    temp = [binary_lst[i:i + 5] for i in range(0, len(binary_lst), 5)]
+    temp = [binary_lst[i:i + word_length] for i in range(0, len(binary_lst), word_length)]
 
     bin_data = ''
 
     for i in range(len(temp)):
-        temp[i] = [0,1,0] + temp[i] # add the uppercase digits, can change to lowercase using [0,1,1]
+        # temp[i] = [0,1,0] + temp[i] # add the uppercase digits, can change to lowercase using [0,1,1]
         str_temp = ' ' # notice the whitespace at the beginning of every letter
         res_temp = ' ' # another temporary variable
         for j in range(len(temp[i])): 
@@ -176,9 +197,9 @@ def binary_converter(string):
         # convert to binary
         temp_lst.append(bin(ord(character))[2:].zfill(8))
         
-    for i in range(len(temp_lst)):
-        # delete three first binary numbers as explained for message
-        temp_lst[i] = temp_lst[i][3:]
+    # for i in range(len(temp_lst)):
+    #     # delete three first binary numbers as explained for message
+    #     temp_lst[i] = temp_lst[i][3:]
         
     for j in range(len(temp_lst)):
         # create message as one list of binary numbers to send to Bob via the channel
@@ -299,4 +320,4 @@ def check_eve(alice_base, bob_base, alice_bits, bob_bits):
         print('Number of bits Not matching:',count_false)
         print('Number of bits matching:',count_true)
         print('Key is safe, continue to encryption')
-        return 
+        return

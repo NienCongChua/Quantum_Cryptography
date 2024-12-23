@@ -54,13 +54,13 @@ _message = input("Enter the message: ")
 binary_message = string_to_binary(_message)
 print('Binary message:', binary_message)
 
-# Ensure the key length matches the length of the binary message
-key_exp_for_message = key_exp[0][:len(binary_message)]  # Adjust the key length to match the message length
-print('Adjusted key for message length:', key_exp_for_message)
-
 # write message given the binary representation - without leading integers as explained above
 message = binary_converter(binary_message)
 print('Alice message:',message)
+
+# Ensure the key length matches the length of the binary message
+key_exp_for_message = key_exp[0]
+print('Adjusted key for message length:', key_exp_for_message)
 
 # Alice creates the encrypted message
 encrypted_message = encryption(message, key_exp_for_message)
@@ -77,7 +77,8 @@ print('\n','Bob recreates the message:', decrypted_message)
 
 # Convert the decrypted message back to a string
 message_bob = string_converter(decrypted_message)
-print('\n',"Bob's recreated string message:", message_bob)
+# message_bob = binary_to_string(message_bob)
+print('\n',"Bob's recreated string message:", binary_to_string(message_bob))
 
 #########################################################################################################################
 # Eve 18 bit example
