@@ -92,11 +92,11 @@ bob_base_theory = random_gen[2]
 eve_base_inc_theory = random_gen[3]
 eve_base_tran_theory = random_gen[4]
 
-print('\n','Alice Base:',alice_base_theory)
-print('\n','Alice Bit:',alice_bit_theory)
-print('\n','Bob Base:',bob_base_theory)
-print('\n','Eve Base Incident:',eve_base_inc_theory)
-print('\n','Eve Base Transmitted:',eve_base_tran_theory)
+# print('\n','Alice Base:',alice_base_theory)
+# print('\n','Alice Bit:',alice_bit_theory)
+# print('\n','Bob Base:',bob_base_theory)
+# print('\n','Eve Base Incident:',eve_base_inc_theory)
+# print('\n','Eve Base Transmitted:',eve_base_tran_theory)
 
 # Simulation
 sim_bit = simulation_with_eve(alice_base_theory,alice_bit_theory,bob_base_theory,eve_base_inc_theory,eve_base_tran_theory)
